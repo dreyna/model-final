@@ -7,11 +7,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import pe.edu.upeu.ppp.config.Conexion;
 import pe.edu.upeu.ppp.dto.UsuarioDTO;
+import pe.edu.upeu.ppp.entity.Usuario;
 /**
  *
  * @author ProfCisco
@@ -47,6 +46,51 @@ private Connection cx= null;
         
         
         return lista;
+    }
+
+    @Override
+    public int createUsuario(Usuario user) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int updateUsuario(Usuario user) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int deleteUsuario(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean validarUsuario(String username) {
+        boolean existe = false;
+        String SQL = "select *from usuario where username=?";
+        try {
+            cx = Conexion.getConexion();
+            ps = cx.prepareStatement(SQL);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                existe = true;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: "+e);
+        }
+        
+        
+        return existe;
+    }
+
+    @Override
+    public Usuario readUsuario(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Usuario> readAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

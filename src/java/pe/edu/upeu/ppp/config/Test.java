@@ -24,6 +24,7 @@ static Gson g = new Gson();
             System.out.println("Conectado");
         }
         System.out.println(g.toJson(udao.login("dreyna", "123")));
+        System.out.println(g.toJson(udao.validarUsuario("dreyna")));
     }
     
 }
