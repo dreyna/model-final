@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import pe.edu.upeu.ppp.config.Conexion;
+import pe.edu.upeu.ppp.dto.UsuarioDTO;
 /**
  *
  * @author ProfCisco
@@ -20,9 +21,9 @@ private PreparedStatement ps;
 private ResultSet rs;
 private Connection cx= null;
     @Override
-    public List<Map<String, Object>> login(String username, String clave) {
-        List<Map<String, Object>> lista = new ArrayList<>();
-        String SQL = "select u.username, u.sexo, r.nombre from usuario as u " +
+    public List<UsuarioDTO> login(String username, String clave) {
+        List<UsuarioDTO> lista = new ArrayList<>();
+        String SQL = "select u.idusuario, u.username, u.sexo, r.nombre as rol from usuario as u " +
                      "inner join usuario_rol as ur on u.idusuario=ur.idusuario " +
                      "inner join rol as r on ur.idrol = r.idrol " +
                      "where u.username=? and u.clave=?";
@@ -33,11 +34,12 @@ private Connection cx= null;
             ps.setString(2, clave);
             rs = ps.executeQuery();
             while(rs.next()){
-                Map<String, Object> map =new HashMap<>();
-                map.put("user", rs.getString("username"));
-                map.put("sexo", rs.getString("sexo"));
-                map.put("rol", rs.getString("nombre"));
-                lista.add(map);
+                UsuarioDTO user =new UsuarioDTO();
+                user.setIdusuario(rs.getInt("idusuario"));
+                user.setUsername(rs.getString("username"));
+                user.setSexo(rs.getString("sexo"));
+                user.setRol(rs.getString("rol"));
+                lista.add(user);
             }
         } catch (SQLException e) {
             System.out.println("Error: "+e);

@@ -2,12 +2,12 @@
 package pe.edu.upeu.ppp.dao;
 
 import java.util.List;
-import java.util.Map;
+import pe.edu.upeu.ppp.dto.UsuarioDTO;
 
 /**
  *
  * @author ProfCisco
  */
 public interface UsuarioDao {
-    public List<Map<String, Object>> login(String username, String clave);
+    public List<UsuarioDTO> login(String username, String clave);
 }
